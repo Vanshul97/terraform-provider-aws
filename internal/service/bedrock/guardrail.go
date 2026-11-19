@@ -211,6 +211,9 @@ func (r *guardrailResource) Schema(ctx context.Context, req resource.SchemaReque
 					listvalidator.SizeAtMost(1),
 				},
 				NestedObject: schema.NestedBlockObject{
+					Attributes: map[string]schema.Attribute{
+						"tier_config": framework.ResourceOptionalComputedSingleNestedChildObjectAttribute[guardrailContextualGroundingTierConfigModel](ctx),
+					},
 					Blocks: map[string]schema.Block{
 						"filters_config": schema.ListNestedBlock{
 							CustomType: fwtypes.NewListNestedObjectTypeOf[contextualGroundingFiltersConfig](ctx),
@@ -850,7 +853,12 @@ type guardrailContentFiltersTierConfigModel struct {
 }
 
 type contextualGroundingPolicyConfig struct {
-	Filters fwtypes.ListNestedObjectValueOf[contextualGroundingFiltersConfig] `tfsdk:"filters_config"`
+	Filters    fwtypes.ListNestedObjectValueOf[contextualGroundingFiltersConfig]            `tfsdk:"filters_config"`
+	TierConfig fwtypes.ListNestedObjectValueOf[guardrailContextualGroundingTierConfigModel] `tfsdk:"tier_config"`
+}
+
+type guardrailContextualGroundingTierConfigModel struct {
+	TierName fwtypes.StringEnum[awstypes.GuardrailContextualGroundingTierName] `tfsdk:"tier_name"`
 }
 
 type contextualGroundingFiltersConfig struct {

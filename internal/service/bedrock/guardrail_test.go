@@ -546,6 +546,9 @@ func TestAccBedrockGuardrail_crossRegion(t *testing.T) {
 					resource.TestCheckResourceAttr(resourceName, "content_policy_config.#", "1"),
 					resource.TestCheckResourceAttr(resourceName, "content_policy_config.0.tier_config.#", "1"),
 					resource.TestCheckResourceAttr(resourceName, "content_policy_config.0.tier_config.0.tier_name", "STANDARD"),
+					resource.TestCheckResourceAttr(resourceName, "contextual_grounding_policy_config.#", "1"),
+					resource.TestCheckResourceAttr(resourceName, "contextual_grounding_policy_config.0.tier_config.#", "1"),
+					resource.TestCheckResourceAttr(resourceName, "contextual_grounding_policy_config.0.tier_config.0.tier_name", "STANDARD"),
 					resource.TestCheckResourceAttr(resourceName, "cross_region_config.#", "1"),
 					resource.TestCheckResourceAttr(resourceName, "topic_policy_config.#", "1"),
 					resource.TestCheckResourceAttr(resourceName, "topic_policy_config.0.tier_config.#", "1"),
@@ -970,6 +973,9 @@ resource "aws_bedrock_guardrail" "test" {
     filters_config {
       threshold = 0.4
       type      = "GROUNDING"
+    }
+    tier_config {
+      tier_name = "STANDARD"
     }
   }
 

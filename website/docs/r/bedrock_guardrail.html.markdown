@@ -130,6 +130,7 @@ The `tier_config` configuration block supports the following arguments:
 The `contextual_grounding_policy_config` configuration block supports the following arguments:
 
 * `filters_config` - (Required) One or more blocks defining contextual grounding filter configs. See [`contextual_grounding_policy_config.filters_config` Block](#contextual_grounding_policy_configfilters_config-block) for more information.
+* `tier_config` - (Optional) Configuration block for the contextual grounding policy tier. See [`contextual_grounding_policy_config.tier_config` Block](#contextual_grounding_policy_configtier_config-block) for more information.
 
 ### `contextual_grounding_policy_config.filters_config` Block
 
@@ -137,6 +138,12 @@ The `filters_config` configuration block supports the following arguments:
 
 * `threshold` - (Required) Threshold for this filter.
 * `type` - (Required) Type of contextual grounding filter.
+
+### `contextual_grounding_policy_config.tier_config` Block
+
+The `tier_config` configuration block supports the following arguments:
+
+* `tier_name` - (Required) Name of the contextual grounding policy tier. Valid values: `CLASSIC`, `STANDARD`. `STANDARD` requires `cross_region_config`.
 
 ### `cross_region_config` Block
 
